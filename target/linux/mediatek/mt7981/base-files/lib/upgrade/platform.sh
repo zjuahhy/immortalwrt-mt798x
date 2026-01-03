@@ -188,6 +188,7 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+	sx,7981r128 |\
 	xiaomi,mi-router-wr30u-112m|\
 	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-ax3000t-an8855|\
@@ -244,6 +245,7 @@ platform_check_image() {
 	[ "$#" -gt 1 ] && return 1
 
 	case "$board" in
+  	sx,7981r128 |\
 	*mt3000* |\
 	glinet,x3000-emmc |\
 	*xe3000* |\

@@ -1,9 +1,6 @@
 KERNEL_LOADADDR := 0x48080000
 
-MT7981_USB_PKGS := automount blkid blockdev fdisk \
-    kmod-nls-cp437 kmod-nls-iso8859-1 kmod-usb2 kmod-usb3 \
-    luci-app-usb-printer luci-i18n-usb-printer-zh-cn \
-    kmod-usb-net-rndis usbutils
+MT7981_USB_PKGS := automount blkid blockdev fdisk kmod-nls-cp437 kmod-nls-iso8859-1 kmod-usb2 kmod-usb3 usbutils
 
 define Device/mt7981-spim-nor-rfb
   DEVICE_VENDOR := MediaTek
@@ -47,6 +44,25 @@ define Device/mt7981-spim-nand-rfb
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += mt7981-spim-nand-rfb
+
+define Device/sx-7981r128
+  DEVICE_VENDOR := SX
+  DEVICE_MODEL := 7981R128
+  DEVICE_DTS := mt7981-spim-nand-7981r128
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := $(MT7981_USB_PKGS) kmod-sfp sgdisk
+  SUPPORTED_DEVICES := sx,7981r128
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 116736k
+  UBOOTENV_IN_UBI := 1
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += sx-7981r128
 
 define Device/mt7981-spim-nand-gsw
   DEVICE_VENDOR := MediaTek
