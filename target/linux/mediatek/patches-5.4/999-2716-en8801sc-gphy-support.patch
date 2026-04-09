@@ -615,31 +615,27 @@ Index: drivers/net/phy/en8801sc.h
 +} gephy_all_REG_dev1Eh_reg017h, *Pgephy_all_REG_dev1Eh_reg017h;
 +
 +#endif /* End of __AIROHA_H */
-Index: drivers/net/phy/Kconfig
-===================================================================
 --- a/drivers/net/phy/Kconfig
 +++ b/drivers/net/phy/Kconfig
-@@ -350,6 +350,11 @@ config AIROHA_EN8801S_PHY
- 	---help---
- 	  Currently supports the Airoha EN8801S PHY.
+@@ -352,6 +352,11 @@ config SFP
+ 	depends on HWMON || HWMON=n
+ 	select MDIO_I2C
  
 +config AIROHA_EN8801SC_PHY
-+        tristate "Drivers for Airoha EN8801S Gigabit PHYs for MT7981 SoC."
-+        ---help---
-+          Currently supports the Airoha EN8801S PHY for MT7981 SoC.
++	tristate "Drivers for Airoha EN8801S Gigabit PHYs for MediaTek SoC."
++	---help---
++	  Currently supports the Airoha EN8801S PHY for MediaTek SoC.
 +
- config ADIN_PHY
- 	tristate "Analog Devices Industrial Ethernet PHYs"
- 	help
-Index: drivers/net/phy/Makefile
-===================================================================
+ config AIROHA_EN8811H_PHY
+ 	tristate "Drivers for Airoha EN8811H 2.5G Gigabit PHY"
+ 	---help---
 --- a/drivers/net/phy/Makefile
 +++ b/drivers/net/phy/Makefile
-@@ -68,6 +68,7 @@ ifdef CONFIG_HWMON
+@@ -68,6 +68,7 @@ aquantia-objs			+= aquantia_main.o
+ ifdef CONFIG_HWMON
  aquantia-objs			+= aquantia_hwmon.o
  endif
- obj-$(CONFIG_AIROHA_EN8801S_PHY)	+= en8801s.o
 +obj-$(CONFIG_AIROHA_EN8801SC_PHY)	+= en8801sc.o
+ air_en8811h-y := air_en8811h_main.o air_en8811h_api.o
+ obj-$(CONFIG_AIROHA_EN8811H_PHY)	+= air_en8811h.o
  obj-$(CONFIG_AQUANTIA_PHY)	+= aquantia.o
- obj-$(CONFIG_AX88796B_PHY)	+= ax88796b.o
- obj-$(CONFIG_AT803X_PHY)	+= at803x.o
