@@ -98,7 +98,7 @@
 			airoha,polarity = <1>;
 			airoha,surge = <0>;
 			airoha,phy-handle;
-			reset-gpios = <&gpio 6 1>;
+			reset-gpios = <&pio 6 GPIO_ACTIVE_LOW>;
 			reset-assert-us = <10000>;
 			reset-deassert-us = <10000>;
 		};
